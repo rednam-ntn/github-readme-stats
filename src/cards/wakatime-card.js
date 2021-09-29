@@ -86,6 +86,7 @@ const createTextNode = ({
 
 const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
   const { languages } = stats;
+  //   TODO@Nam: filter Language name "Other"
   const {
     hide_title = false,
     hide_border = false,
