@@ -31,8 +31,6 @@ module.exports = async (req, res) => {
     border_radius,
     border_color,
   } = req.query;
-  let topLangs;
-
   res.setHeader("Content-Type", "image/svg+xml");
 
   if (blacklist.includes(username)) {
@@ -40,14 +38,13 @@ module.exports = async (req, res) => {
   }
 
   if (locale && !isLocaleAvailable(locale)) {
-    return res.send(renderError("Something went wrong", "Language not found"));
+    return res.send(renderError("Something went wrong", "Locale not found"));
   }
 
   try {
-    topLangs = await fetchTopLanguages(
+    const topLangs = await fetchTopLanguages(
       username,
       parseArray(exclude_repo),
-      parseArray(hide),
     );
 
     const cacheSeconds = clampValue(
